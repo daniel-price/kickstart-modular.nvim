@@ -15,4 +15,11 @@ return {
     },
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
+
+  {
+    'Lilja/zellij.nvim',
+    opts = {
+      vimTmuxNavigatorKeybinds = false, -- Will set keybinds like <C-h> to left
+    },
+  },
 }
