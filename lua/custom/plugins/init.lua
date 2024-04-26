@@ -35,4 +35,9 @@ return {
       vim.keymap.set('n', '<C-l>', nvim_tmux_nav.NvimTmuxNavigateRight)
     end,
   },
+  {
+    'lewis6991/gitsigns.nvim',
+    enabled = vim.fn.executable 'git' == 1,
+    opts = {},
+  },
 }
