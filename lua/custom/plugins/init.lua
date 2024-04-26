@@ -40,4 +40,9 @@ return {
     enabled = vim.fn.executable 'git' == 1,
     opts = {},
   },
+  {
+    'pmizio/typescript-tools.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
+    opts = {},
+  },
 }

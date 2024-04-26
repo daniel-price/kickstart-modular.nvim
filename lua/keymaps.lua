@@ -112,6 +112,9 @@ vim.keymap.set('n', '<Leader>gd', function()
   require('gitsigns').diffthis()
 end, { desc = 'View Git diff' })
 
+vim.keymap.set('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>bprev<CR>', { desc = 'Next buffer' })
+
 -- Other
 vim.keymap.set('n', '<Leader>gg', function()
   require('functions').ShortGuid()
