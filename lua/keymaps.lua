@@ -9,7 +9,7 @@ vim.keymap.set('n', '<Esc>', '<cmd>nohlsearch<CR>')
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous [D]iagnostic message' })
 vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next [D]iagnostic message' })
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Show diagnostic [E]rror messages' })
-vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostic [Q]uickfix list' })
+vim.keymap.set('n', '<leader>q', vim.diagnostic.setqflist, { desc = 'Open diagnostic [Q]uickfix list' })
 
 -- Exit terminal mode in the builtin terminal with a shortcut that is a bit easier
 -- for people to discover. Otherwise, you normally need to press <C-\><C-n>, which
@@ -112,12 +112,14 @@ vim.keymap.set('n', '<Leader>gd', function()
   require('gitsigns').diffthis()
 end, { desc = 'View Git diff' })
 
-vim.keymap.set('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
-vim.keymap.set('n', '<S-Tab>', '<cmd>bprev<CR>', { desc = 'Next buffer' })
-
 -- Other
 vim.keymap.set('n', '<Leader>gg', function()
   require('functions').ShortGuid()
 end, { desc = '[G]enerate [G]uid' })
+
+vim.keymap.set('n', '<Tab>', '<cmd>bnext<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<S-Tab>', '<cmd>bprev<CR>', { desc = 'Next buffer' })
+vim.keymap.set('n', '<C-n>', '<cmd>cnext<cr>', { desc = 'Next quickfix item' })
+vim.keymap.set('n', '<C-p>', '<cmd>cprev<cr>', { desc = 'Previous quickfix item' })
 
 -- vim: ts=2 sts=2 sw=2 et
