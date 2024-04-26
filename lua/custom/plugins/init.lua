@@ -2,4 +2,17 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
-return {}
+return {
+  {
+    'stevearc/oil.nvim',
+    opts = {},
+    keys = {
+      {
+        '-',
+        '<CMD>Oil<CR>',
+        desc = 'Open Oil',
+      },
+    },
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+  },
+}
