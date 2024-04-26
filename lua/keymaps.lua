@@ -48,4 +48,38 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
+-- Terminal/Toggle/Test
+vim.keymap.set('n', '<Leader>to', function()
+  require('functions').TmuxOpen()
+end, { desc = '[T]mux [O]pen' })
+
+vim.keymap.set('n', '<Leader>tr', function()
+  require('functions').TmuxRepeat()
+end, { desc = '[T]mux [R]epeat' })
+
+vim.keymap.set('n', '<Leader>ta', function()
+  require('functions').TmuxTestAll()
+end, { desc = '[T]est [A]ll' })
+
+vim.keymap.set('n', '<Leader>tf', function()
+  require('functions').TmuxTestFile()
+end, { desc = '[T]est [F]ile' })
+
+vim.keymap.set('n', '<Leader>tn', function()
+  require('functions').TmuxTestNearest()
+end, { desc = '[T]est [N]earest' })
+
+vim.keymap.set('n', '<Leader>tt', function()
+  require('functions').ToggleTest()
+end, { desc = '[T]oggle [T]est' })
+
+vim.keymap.set('n', '<Leader>th', function()
+  require('functions').ToggleHtml()
+end, { desc = '[T]oggle [H]tml' })
+
+-- Other
+vim.keymap.set('n', '<Leader>gg', function()
+  require('functions').ShortGuid()
+end, { desc = '[G]enerate [G]uid' })
+
 -- vim: ts=2 sts=2 sw=2 et
