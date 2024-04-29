@@ -34,11 +34,91 @@ return {
       --  into multiple repos for maintenance purposes.
       'hrsh7th/cmp-nvim-lsp',
       'hrsh7th/cmp-path',
+
+      'zbirenbaum/copilot.lua',
     },
     config = function()
       -- See `:help cmp`
       local cmp = require 'cmp'
       local luasnip = require 'luasnip'
+
+      local copilot = require 'copilot.suggestion'
+
+      local function has_words_before()
+        local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+        return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
+      end
+
+      local mapping = {}
+      mapping['<Tab>'] = cmp.mapping(function(fallback)
+        if copilot.is_visible() then
+          copilot.accept()
+        elseif cmp.visible() then
+          cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
+        elseif has_words_before() then
+          cmp.complete()
+        else
+          fallback()
+        end
+      end, { 'i', 's' })
+
+      mapping['<C-x>'] = cmp.mapping(function()
+        if copilot.is_visible() then
+          copilot.next()
+        end
+      end)
+
+      mapping['<C-z>'] = cmp.mapping(function()
+        if copilot.is_visible() then
+          copilot.prev()
+        end
+      end)
+
+      mapping['<C-c>'] = cmp.mapping(function()
+        if copilot.is_visible() then
+          copilot.dismiss()
+        end
+      end)
+
+      mapping['<CR>'] = cmp.mapping.confirm { select = true }
+      -- local originalMapping = {
+      --   -- Scroll the documentation window [b]ack / [f]orward
+      --   ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      --   ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      --
+      --   ['<CR>'] = cmp.mapping.confirm { select = true },
+      --   ['<Tab>'] = cmp.mapping.select_next_item(),
+      --   ['<S-Tab>'] = cmp.mapping.select_prev_item(),
+      --
+      --   -- Manually trigger a completion from nvim-cmp.
+      --   --  Generally you don't need this, because nvim-cmp will display
+      --   --  completions whenever it has completion options available.
+      --   ['<C-Space>'] = cmp.mapping.complete {},
+      --
+      --   -- Think of <c-l> as moving to the right of your snippet expansion.
+      --   --  So if you have a snippet that's like:
+      --   --  function $name($args)
+      --   --    $body
+      --   --  end
+      --   --
+      --   -- <c-l> will move you to the right of each of the expansion locations.
+      --   -- <c-h> is similar, except moving you backwards.
+      --   ['<C-l>'] = cmp.mapping(function()
+      --     if luasnip.expand_or_locally_jumpable() then
+      --       luasnip.expand_or_jump()
+      --     end
+      --   end, { 'i', 's' }),
+      --   ['<C-h>'] = cmp.mapping(function()
+      --     if luasnip.locally_jumpable(-1) then
+      --       luasnip.jump(-1)
+      --     end
+      --   end, { 'i', 's' }),
+      --
+      --   -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
+      --   --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+      -- }
       luasnip.config.setup {}
 
       cmp.setup {
@@ -53,42 +133,7 @@ return {
         -- chosen, you will need to read `:help ins-completion`
         --
         -- No, but seriously. Please read `:help ins-completion`, it is really good!
-        mapping = cmp.mapping.preset.insert {
-          -- Scroll the documentation window [b]ack / [f]orward
-          ['<C-b>'] = cmp.mapping.scroll_docs(-4),
-          ['<C-f>'] = cmp.mapping.scroll_docs(4),
-
-          ['<CR>'] = cmp.mapping.confirm { select = true },
-          ['<Tab>'] = cmp.mapping.select_next_item(),
-          ['<S-Tab>'] = cmp.mapping.select_prev_item(),
-
-          -- Manually trigger a completion from nvim-cmp.
-          --  Generally you don't need this, because nvim-cmp will display
-          --  completions whenever it has completion options available.
-          ['<C-Space>'] = cmp.mapping.complete {},
-
-          -- Think of <c-l> as moving to the right of your snippet expansion.
-          --  So if you have a snippet that's like:
-          --  function $name($args)
-          --    $body
-          --  end
-          --
-          -- <c-l> will move you to the right of each of the expansion locations.
-          -- <c-h> is similar, except moving you backwards.
-          ['<C-l>'] = cmp.mapping(function()
-            if luasnip.expand_or_locally_jumpable() then
-              luasnip.expand_or_jump()
-            end
-          end, { 'i', 's' }),
-          ['<C-h>'] = cmp.mapping(function()
-            if luasnip.locally_jumpable(-1) then
-              luasnip.jump(-1)
-            end
-          end, { 'i', 's' }),
-
-          -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-          --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
-        },
+        mapping = cmp.mapping.preset.insert(mapping),
         sources = {
           { name = 'nvim_lsp' },
           { name = 'luasnip' },

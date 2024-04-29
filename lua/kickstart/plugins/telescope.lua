@@ -29,7 +29,7 @@ return {
         }
       end,
       keys = {
-        { '<leader>se', '<cmd>:Easypick<cr>', { desc = '[S]earch [E]asypickers' } },
+        { '<leader>se', '<cmd>:Easypick<cr>', desc = '[S]earch [E]asypickers' },
       },
     },
   },
