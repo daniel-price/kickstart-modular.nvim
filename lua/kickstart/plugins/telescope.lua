@@ -6,6 +6,33 @@
 -- Use the `dependencies` key to specify the dependencies of a particular plugin
 
 return {
+  {
+    {
+      'axkirillov/easypick.nvim',
+      requires = 'nvim-telescope/telescope.nvim',
+      opts = function(_, opts)
+        local easypick = require 'easypick'
+
+        opts.pickers = {
+          -- list files that have conflicts with diffs in preview
+          {
+            name = 'Conflicts',
+            command = 'git diff --name-only --diff-filter=U --relative',
+            previewer = easypick.previewers.file_diff(),
+          },
+
+          {
+            name = 'Last commit',
+            command = 'git diff --name-only HEAD HEAD~1',
+            previewer = easypick.previewers.branch_diff { base_branch = 'HEAD~1' },
+          },
+        }
+      end,
+      keys = {
+        { '<leader>se', '<cmd>:Easypick<cr>', { desc = '[S]earch [E]asypickers' } },
+      },
+    },
+  },
   { -- Fuzzy Finder (files, lsp, etc)
     'nvim-telescope/telescope.nvim',
     event = 'VimEnter',
@@ -29,6 +56,10 @@ return {
 
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
+      config = function()
+        vim.keymap.set('n', '<leader>se', '<cmd>:Easypick<cr>', { desc = '[S]earch [E]asypickers' })
+        vim.keymap.set('n', '<leader>se', '<cmd>:Easypick<cr>', { desc = '[S]earch [E]asypickers' })
+      end,
     },
     config = function()
       -- Telescope is a fuzzy finder that comes with a lot of different things that
