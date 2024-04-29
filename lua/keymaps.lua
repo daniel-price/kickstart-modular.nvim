@@ -77,6 +77,10 @@ vim.keymap.set('n', '<Leader>th', function()
   require('functions').ToggleHtml()
 end, { desc = '[T]oggle [H]tml' })
 
+vim.keymap.set('n', '<Leader>ti', function()
+  require('functions').ToggleInfrastructure()
+end, { desc = '[T]oggle [I]nfrastructure' })
+
 -- git signs
 vim.keymap.set('n', ']g', function()
   require('gitsigns').next_hunk()

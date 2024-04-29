@@ -272,4 +272,15 @@ M.ShortGuid = function()
   vim.api.nvim_set_current_line(nline)
 end
 
+M.ToggleInfrastructure = function()
+  local bufferPath = vim.api.nvim_buf_get_name(0)
+
+  local searchString = string.match(bufferPath, '.*(src.*).ts')
+  if not searchString then
+    print 'no search string found'
+    return
+  end
+  require('telescope.builtin').grep_string { search = searchString .. '.handler' }
+end
+
 return M
