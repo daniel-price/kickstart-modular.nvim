@@ -47,4 +47,13 @@ return {
       root_dir = require('lspconfig.util').root_pattern('sst.config.ts', 'tsconfig.json', 'package.json', 'jsconfig.json', '.git'),
     },
   },
+  {
+    'redve-dev/neovim-git-reminder',
+    dependencies = {
+      'rcarriga/nvim-notify',
+    },
+    opts = {
+      required_changes = 5,
+    },
+  },
 }
