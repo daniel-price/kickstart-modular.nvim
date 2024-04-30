@@ -126,4 +126,5 @@ vim.keymap.set('n', '<S-Tab>', '<cmd>bprev<CR>', { desc = 'Next buffer' })
 vim.keymap.set('n', '<C-n>', '<cmd>cnext<cr>', { desc = 'Next quickfix item' })
 vim.keymap.set('n', '<C-p>', '<cmd>cprev<cr>', { desc = 'Previous quickfix item' })
 
+vim.keymap.set('n', '<Leader>rd', vim.diagnostic.reset, { desc = 'Reset diagnostics' })
 -- vim: ts=2 sts=2 sw=2 et

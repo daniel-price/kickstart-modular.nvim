@@ -43,6 +43,8 @@ return {
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
-    opts = {},
+    opts = {
+      root_dir = require('lspconfig.util').root_pattern('sst.config.ts', 'tsconfig.json', 'package.json', 'jsconfig.json', '.git'),
+    },
   },
 }
