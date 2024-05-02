@@ -159,7 +159,7 @@ return {
       {
         '<leader>tl',
         function()
-          require('neotest').summary.open()
+          require('neotest').summary.toggle()
         end,
         desc = '[T]est [L]ist',
       },
