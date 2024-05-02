@@ -158,8 +158,10 @@ return {
       },
       {
         '<leader>tl',
-        '<CMD>NeotestRunLast<CR>',
-        desc = 'Run last test',
+        function()
+          require('neotest').summary.open()
+        end,
+        desc = '[T]est [L]ist',
       },
       {
         '<leader>tf',
