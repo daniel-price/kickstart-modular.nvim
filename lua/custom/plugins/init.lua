@@ -2,6 +2,73 @@
 --  I promise not to create any merge conflicts in this directory :)
 --
 -- See the kickstart.nvim README for more information
+local function pathIsTestFile(path)
+  return string.match(path, '.*%.spec%.ts')
+end
+
+local function fileExists(name)
+  local f = io.open(name, 'r')
+  if f ~= nil then
+    io.close(f)
+    return true
+  else
+    return false
+  end
+end
+
+local function getCurrentTestFile()
+  local bufferPath = vim.api.nvim_buf_get_name(0)
+  local isTestFile = pathIsTestFile(bufferPath)
+
+  if isTestFile then
+    return bufferPath
+  else
+    local testFile = string.gsub(bufferPath, '%.ts', '%.spec%.ts')
+    if fileExists(testFile) then
+      return testFile
+    end
+  end
+end
+
+local function getRootFolder(bufferPath)
+  local backendPath = string.match(bufferPath, '.*backend')
+  if backendPath then
+    return backendPath
+  end
+
+  local appPatientPath = string.match(bufferPath, '.*app%-patient/patient')
+  if appPatientPath then
+    return appPatientPath
+  end
+
+  local appManagePath = string.match(bufferPath, '.*app%-manage/manage')
+  if appManagePath then
+    return appManagePath
+  end
+
+  local sharedPath = string.match(bufferPath, '.*shared')
+  if sharedPath then
+    return sharedPath
+  end
+
+  local regionPath = string.match(bufferPath, '.*region')
+  if regionPath then
+    return regionPath
+  end
+
+  local globalPath = string.match(bufferPath, '.*global')
+  if globalPath then
+    return globalPath
+  end
+
+  local dentallyMockPath = string.match(bufferPath, '.*dentally%-mock')
+  if dentallyMockPath then
+    return dentallyMockPath
+  end
+
+  print 'No root folder found!'
+end
+
 return {
   {
     'stevearc/oil.nvim',
@@ -55,5 +122,74 @@ return {
     opts = {
       required_changes = 5,
     },
+  },
+
+  {
+    'nvim-neotest/neotest',
+    dependencies = {
+      'nvim-neotest/nvim-nio',
+      'nvim-lua/plenary.nvim',
+      'antoinemadec/FixCursorHold.nvim',
+      'nvim-treesitter/nvim-treesitter',
+      'nvim-neotest/neotest-jest',
+    },
+    config = function()
+      require('neotest').setup {
+        log_level = 0,
+        adapters = {
+          require 'neotest-jest' {
+            jestCommand = 'npm test --',
+            jestConfigFile = 'custom.jest.config.ts',
+            env = { CI = true },
+            cwd = function(path)
+              return getRootFolder(path)
+            end,
+          },
+        },
+      }
+    end,
+    keys = {
+      {
+        '<leader>tn',
+        function()
+          require('neotest').run.run()
+        end,
+        desc = 'Run tests',
+      },
+      {
+        '<leader>tl',
+        '<CMD>NeotestRunLast<CR>',
+        desc = 'Run last test',
+      },
+      {
+        '<leader>tf',
+        function()
+          require('neotest').run.run(getCurrentTestFile())
+        end,
+        desc = 'Run file tests',
+      },
+      {
+        '<leader>ts',
+        function()
+          require('neotest').run.run(getRootFolder(vim.fn.expand '%'))
+        end,
+        desc = 'Run suite tests',
+      },
+      {
+        '<leader>td',
+        '<CMD>NeotestDebug<CR>',
+        desc = 'Debug tests',
+      },
+      {
+        '<leader>tc',
+        '<CMD>NeotestClear<CR>',
+        desc = 'Clear tests',
+      },
+    },
+  },
+  {
+
+    'axkirillov/hbac.nvim',
+    config = true,
   },
 }

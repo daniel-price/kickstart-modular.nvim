@@ -57,17 +57,17 @@ vim.keymap.set('n', '<Leader>tr', function()
   require('functions').TmuxRepeat()
 end, { desc = '[T]mux [R]epeat' })
 
-vim.keymap.set('n', '<Leader>ta', function()
-  require('functions').TmuxTestAll()
-end, { desc = '[T]est [A]ll' })
-
-vim.keymap.set('n', '<Leader>tf', function()
-  require('functions').TmuxTestFile()
-end, { desc = '[T]est [F]ile' })
-
-vim.keymap.set('n', '<Leader>tn', function()
-  require('functions').TmuxTestNearest()
-end, { desc = '[T]est [N]earest' })
+-- vim.keymap.set('n', '<Leader>ta', function()
+--   require('functions').TmuxTestAll()
+-- end, { desc = '[T]est [A]ll' })
+--
+-- vim.keymap.set('n', '<Leader>tf', function()
+--   require('functions').TmuxTestFile()
+-- end, { desc = '[T]est [F]ile' })
+--
+-- vim.keymap.set('n', '<Leader>tn', function()
+--   require('functions').TmuxTestNearest()
+-- end, { desc = '[T]est [N]earest' })
 
 vim.keymap.set('n', '<Leader>tt', function()
   require('functions').ToggleTest()
