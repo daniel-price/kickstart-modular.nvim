@@ -138,7 +138,7 @@ return {
         log_level = 0,
         adapters = {
           require 'neotest-jest' {
-            jestCommand = 'npm test --',
+            jestCommand = require('neotest-jest.jest-util').getJestCommand(vim.fn.expand '%:p:h') .. ' --watch',
             jestConfigFile = 'custom.jest.config.ts',
             env = { CI = true },
             cwd = function(path)
