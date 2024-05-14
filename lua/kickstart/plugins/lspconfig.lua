@@ -14,6 +14,12 @@ return {
       -- `neodev` configures Lua LSP for your Neovim config, runtime and plugins
       -- used for completion, annotations and signatures of Neovim apis
       { 'folke/neodev.nvim', opts = {} },
+
+      { -- Show function signature
+        'ray-x/lsp_signature.nvim',
+        event = 'VeryLazy',
+        opts = {},
+      },
     },
     config = function()
       -- Brief aside: **What is LSP?**
