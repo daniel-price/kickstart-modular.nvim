@@ -124,11 +124,15 @@ return {
         -- You can put your default mappings / updates / etc. in here
         --  All the info you're looking for is in `:help telescope.setup()`
         --
-        -- defaults = {
-        --   mappings = {
-        --     i = { ['<c-enter>'] = 'to_fuzzy_refine' },
-        --   },
-        -- },
+        defaults = {
+          path_display = { filename_first = { reverse_directories = false } },
+          layout_strategy = 'flex',
+          layout_config = {
+            width = 0.9,
+            height = 0.9,
+            preview_cutoff = 0,
+          },
+        },
         -- pickers = {}
         extensions = {
           ['ui-select'] = {
@@ -146,7 +150,7 @@ return {
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', builtin.find_files, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', require('telescope').extensions.smart_open.smart_open, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sc', builtin.grep_string, { desc = '[S]earch [C]urrent Word' })
       vim.keymap.set('n', '<leader>sw', builtin.live_grep, { desc = '[S]earch by [W]ord' })
