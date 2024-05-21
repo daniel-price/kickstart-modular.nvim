@@ -125,8 +125,8 @@ return {
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
-          path_display = { filename_first = { reverse_directories = false } },
-          layout_strategy = 'flex',
+          path_display = { 'filename_first' },
+          layout_strategy = 'vertical',
           layout_config = {
             width = 0.9,
             height = 0.9,

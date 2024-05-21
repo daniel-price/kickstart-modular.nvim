@@ -124,6 +124,13 @@ return {
     },
   },
   {
+    'dstein64/nvim-scrollview',
+    opts = {
+      signs_on_startup = { 'all' },
+      diagnostics_severities = { vim.diagnostic.severity.ERROR },
+    },
+  },
+  {
     'yutkat/git-rebase-auto-diff.nvim',
     ft = { 'gitrebase' },
     config = function()

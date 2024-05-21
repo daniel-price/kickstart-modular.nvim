@@ -65,6 +65,7 @@ return {
       ensure_installed = {
         -- Update this to ensure that you have the debuggers for the langs you want
         'js',
+        'js-debug-adapter'
       },
     }
 
@@ -132,8 +133,8 @@ return {
             'nhs.spec.ts',
           },
           -- TODO dynamically set rootPath and cwd based on filepath
-          rootPath = '${workspaceFolder}/backend',
-          cwd = '${workspaceFolder}/backend',
+          rootPath = '${workspaceFolder}/shared',
+          cwd = '${workspaceFolder}/shared',
           console = 'integratedTerminal',
           internalConsoleOptions = 'neverOpen',
         },
