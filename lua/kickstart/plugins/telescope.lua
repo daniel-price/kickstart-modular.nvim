@@ -54,43 +54,6 @@ return {
       },
       { 'nvim-telescope/telescope-ui-select.nvim' },
 
-      {
-        'axkirillov/hbac.nvim',
-        config = function()
-          local actions = require 'hbac.telescope.actions'
-          require('hbac').setup {
-            threshold = 2, -- hbac will start closing unedited buffers once that number is reached
-            telescope = {
-              sort_mru = true,
-              sort_lastused = true,
-              selection_strategy = 'row',
-              use_default_mappings = false, -- false to not include the mappings below
-              mappings = {
-                i = {
-                  ['<A-c>'] = actions.close_unpinned,
-                  ['<A-x>'] = actions.delete_buffer,
-                  ['<A-a>'] = actions.pin_all,
-                  ['<A-u>'] = actions.unpin_all,
-                  ['<A-y>'] = actions.toggle_pin,
-                },
-                n = {
-                  ['<A-c>'] = actions.close_unpinned,
-                  ['<A-x>'] = actions.delete_buffer,
-                  ['<A-a>'] = actions.pin_all,
-                  ['<A-u>'] = actions.unpin_all,
-                  ['<A-y>'] = actions.toggle_pin,
-                },
-              },
-              -- Pinned/unpinned icons and their hl groups. Defaults to nerdfont icons
-              pin_icons = {
-                pinned = { '󰐃 ', hl = 'DiagnosticOk' },
-                unpinned = { '󰤱 ', hl = 'DiagnosticError' },
-              },
-            },
-          }
-        end,
-      },
-
       -- Useful for getting pretty icons, but requires a Nerd Font.
       { 'nvim-tree/nvim-web-devicons', enabled = vim.g.have_nerd_font },
       config = function()
@@ -144,7 +107,6 @@ return {
       -- Enable Telescope extensions if they are installed
       pcall(require('telescope').load_extension, 'fzf')
       pcall(require('telescope').load_extension, 'ui-select')
-      pcall(require('telescope').load_extension 'hbac')
 
       -- See `:help telescope.builtin`
       local builtin = require 'telescope.builtin'
@@ -158,7 +120,6 @@ return {
       vim.keymap.set('n', '<leader>sd', builtin.diagnostics, { desc = '[S]earch [D]iagnostics' })
       vim.keymap.set('n', '<leader>sr', builtin.resume, { desc = '[S]earch [R]esume' })
       vim.keymap.set('n', '<leader>s.', builtin.oldfiles, { desc = '[S]earch Recent Files ("." for repeat)' })
-      vim.keymap.set('n', '<leader><leader>', require('telescope').extensions.hbac.buffers, { desc = '[ ] Find existing buffers' })
 
       -- Slightly advanced example of overriding default behavior and theme
       vim.keymap.set('n', '<leader>/', function()
