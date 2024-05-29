@@ -112,7 +112,9 @@ return {
       local builtin = require 'telescope.builtin'
       vim.keymap.set('n', '<leader>sh', builtin.help_tags, { desc = '[S]earch [H]elp' })
       vim.keymap.set('n', '<leader>sk', builtin.keymaps, { desc = '[S]earch [K]eymaps' })
-      vim.keymap.set('n', '<leader>sf', require('telescope').extensions.smart_open.smart_open, { desc = '[S]earch [F]iles' })
+      vim.keymap.set('n', '<leader>sf', function()
+        require('telescope').extensions.smart_open.smart_open { cwd_only = true }
+      end, { desc = '[S]earch [F]iles' })
       vim.keymap.set('n', '<leader>ss', builtin.builtin, { desc = '[S]earch [S]elect Telescope' })
       vim.keymap.set('n', '<leader>sc', builtin.grep_string, { desc = '[S]earch [C]urrent Word' })
       vim.keymap.set('n', '<leader>sw', builtin.live_grep, { desc = '[S]earch by [W]ord' })
