@@ -213,4 +213,24 @@ return {
       },
     },
   },
+  {
+    'Asheq/close-buffers.vim',
+    keys = {
+      {
+        '<leader>bdt',
+        ':Bdelete this<CR>',
+        desc = '[B]uffer [D]elete [T]his',
+      },
+      {
+        '<leader>bda',
+        ':Bdelete all<CR>',
+        desc = '[B]uffer [D]elete [A]ll',
+      },
+      {
+        '<leader>bdo',
+        ':Bdelete other<CR>',
+        desc = '[B]uffer [D]elete [O]ther',
+      },
+    },
+  },
 }
