@@ -55,4 +55,8 @@ vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
 vim.opt.scrolloff = 20
 
+-- Allow using gf to open .handler files from lib/*Stack files
+vim.opt.path = vim.opt.path + '*'
+vim.opt.includeexpr = "substitute(v:fname,'\\.handler','.ts','g')"
+
 -- vim: ts=2 sts=2 sw=2 et
