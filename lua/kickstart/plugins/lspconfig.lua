@@ -209,6 +209,9 @@ return {
       vim.list_extend(ensure_installed, {
         'stylua', -- Used to format Lua code
         'js-debug-adapter',
+        'shfmt', -- Used to format shell scripts
+        'shellcheck', -- Used to lint shell scripts
+        'bash-language-server', -- Used for bash completion
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
