@@ -77,8 +77,8 @@ vim.keymap.set('n', '<Leader>th', function()
   require('functions').ToggleHtml()
 end, { desc = '[T]oggle [H]tml' })
 
-vim.keymap.set('n', '<Leader>ti', function()
-  require('functions').ToggleInfrastructure()
+vim.keymap.set('n', '<Leader>si', function()
+  require('functions').SearchInfrastructure()
 end, { desc = '[T]oggle [I]nfrastructure' })
 
 -- git signs

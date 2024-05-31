@@ -272,7 +272,7 @@ M.ShortGuid = function()
   vim.api.nvim_set_current_line(nline)
 end
 
-M.ToggleInfrastructure = function()
+M.SearchInfrastructure = function()
   local bufferPath = vim.api.nvim_buf_get_name(0)
 
   local searchString = string.match(bufferPath, '.*(src.*).ts')
