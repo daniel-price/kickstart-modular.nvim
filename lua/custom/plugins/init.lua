@@ -237,4 +237,8 @@ return {
   {
     'coderifous/textobj-word-column.vim',
   },
+
+  {
+    'TamaMcGlinn/quickfixdd',
+  },
 }
