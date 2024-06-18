@@ -120,7 +120,7 @@ return {
       'rcarriga/nvim-notify',
     },
     opts = {
-      required_changes = 5,
+      required_changes = 20,
     },
   },
   {
