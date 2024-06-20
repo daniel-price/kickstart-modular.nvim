@@ -177,7 +177,20 @@ return {
         -- tsserver = {},
         --
 
-        eslint = {},
+        angularls = {},
+        -- https://github.com/neovim/nvim-lspconfig/issues/3146
+        -- diagnostics don't work on latest eslint - use this to install 4.8 instead:
+        -- MasonInstall eslint-lsp@4.8.0
+        eslint = {
+          {
+            on_attach = function(client, bufnr)
+              vim.api.nvim_create_autocmd('BufWritePre', {
+                buffer = bufnr,
+                command = 'EslintFixAll',
+              })
+            end,
+          },
+        },
 
         lua_ls = {
           -- cmd = {...},
@@ -212,6 +225,7 @@ return {
         'shfmt', -- Used to format shell scripts
         'shellcheck', -- Used to lint shell scripts
         'bash-language-server', -- Used for bash completion
+        'angular-language-server',
       })
       require('mason-tool-installer').setup { ensure_installed = ensure_installed }
 
