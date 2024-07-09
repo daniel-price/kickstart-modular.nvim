@@ -88,6 +88,8 @@ return {
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
+          additional_args = { '--hidden' },
+          hidden = true,
           path_display = { 'filename_first' },
           layout_strategy = 'vertical',
           layout_config = {
@@ -95,8 +97,27 @@ return {
             height = 0.9,
             preview_cutoff = 0,
           },
+          mappings = {
+            i = {
+              ['<d-v>'] = function(prompt_bufnr)
+                print 'ctrl-v'
+                local current_picker = require('telescope').action_state.get_current_picker(prompt_bufnr)
+                local text = vim.fn.getreg('+'):gsub('\n', '\\n') -- which register depends on clipboard option
+                current_picker:set_prompt('testing', false)
+              end,
+            },
+          },
         },
         pickers = {
+          find_files = {
+            hidden = true,
+          },
+          grep_string = {
+            additional_args = { '--hidden' },
+          },
+          live_grep = {
+            additional_args = { '--hidden' },
+          },
           buffers = {
             show_all_buffers = true,
             sort_mru = true,
