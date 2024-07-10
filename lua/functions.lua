@@ -260,11 +260,10 @@ M.ShortGuid = function()
   local pos = vim.api.nvim_win_get_cursor(0)[2]
   local line = vim.api.nvim_get_current_line()
 
-  local current_char = line:sub(pos + 1, pos + 1)
   local next_char = line:sub(pos + 2, pos + 2)
 
   local insertAtIndex = pos
-  if current_char == "'" and next_char == "'" then
+  if next_char == "'" or next_char == '"' then
     insertAtIndex = pos + 1
   end
 
