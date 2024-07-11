@@ -88,6 +88,7 @@ return {
         --  All the info you're looking for is in `:help telescope.setup()`
         --
         defaults = {
+          file_ignore_patterns = { 'node_modules/.*', '.git/.*', '.*.crt', '%.pem' },
           additional_args = { '--hidden' },
           hidden = true,
           path_display = { 'filename_first' },
