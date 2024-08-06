@@ -83,10 +83,6 @@ return {
     dependencies = { 'nvim-tree/nvim-web-devicons' },
   },
 
-  -- {
-  --   'Lilja/zellij.nvim',
-  --   opts = {},
-  -- },
   {
     'alexghergh/nvim-tmux-navigation',
     config = function()
@@ -102,11 +98,13 @@ return {
       vim.keymap.set('n', '<C-l>', nvim_tmux_nav.NvimTmuxNavigateRight)
     end,
   },
+
   {
     'lewis6991/gitsigns.nvim',
     enabled = vim.fn.executable 'git' == 1,
     opts = {},
   },
+
   {
     'pmizio/typescript-tools.nvim',
     dependencies = { 'nvim-lua/plenary.nvim', 'neovim/nvim-lspconfig' },
@@ -114,6 +112,7 @@ return {
       root_dir = require('lspconfig.util').root_pattern('sst.config.ts', 'tsconfig.json', 'package.json', 'jsconfig.json', '.git'),
     },
   },
+
   {
     'redve-dev/neovim-git-reminder',
     dependencies = {
@@ -123,6 +122,7 @@ return {
       required_changes = 20,
     },
   },
+
   {
     'dstein64/nvim-scrollview',
     opts = {
@@ -130,6 +130,7 @@ return {
       -- diagnostics_severities = { vim.diagnostic.severity.ERROR },
     },
   },
+
   {
     'yutkat/git-rebase-auto-diff.nvim',
     ft = { 'gitrebase' },
@@ -137,6 +138,7 @@ return {
       require('git-rebase-auto-diff').setup()
     end,
   },
+
   {
     'danielfalk/smart-open.nvim',
     branch = '0.2.x',
@@ -148,6 +150,7 @@ return {
       { 'nvim-telescope/telescope-fzy-native.nvim' },
     },
   },
+
   {
     'nvim-neotest/neotest',
     dependencies = {
@@ -213,6 +216,7 @@ return {
       },
     },
   },
+
   {
     'Asheq/close-buffers.vim',
     keys = {
@@ -240,5 +244,9 @@ return {
 
   {
     'TamaMcGlinn/quickfixdd',
+  },
+
+  {
+    'almo7aya/openingh.nvim',
   },
 }
